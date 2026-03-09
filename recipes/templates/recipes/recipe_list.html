@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>Recipes</h2>
+<a class="btn btn-primary mb-3" href="{% url 'recipe_add' %}">Add Recipe</a>
+
+<!-- Search Form -->
+<form method="GET">
+    <input type="text" name="q" placeholder="Search recipe..." class="form-control mb-3">
+</form>
+
+<!-- Table View -->
+<table class="table table-bordered">
+    <tr>
+        <th>Name</th>
+        <th>Actions</th>
+    </tr>
+    {% for recipe in recipes %}
+    <tr>
+        <td>{{ recipe.title }}</td>
+        <td>
+            <a class="btn btn-info btn-sm" href="{% url 'recipe_detail' recipe.id %}">View</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<!-- Card View -->
+<div class="container mt-4">
+    <div class="row">
+        {% for recipe in recipes %}
+        <div class="col-md-4">
+            <div class="card mb-4 shadow">
+                {% if recipe.image %}
+                <img src="{{ recipe.image.url }}" class="card-img-top">
+                {% endif %}
+                <div class="card-body">
+                    <h5>{{ recipe.title }}</h5>
+                    <p>{{ recipe.description|truncatewords:10 }}</p>
+                    <a href="{% url 'recipe_detail' recipe.pk %}" class="btn btn-primary">View</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<style>
+    /* General page styling */
+body {
+    background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+}
+
+/* Headings */
+h2 {
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #ff5722; /* Bright orange */
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+/* Table styling */
+.table {
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.table th {
+    background: linear-gradient(90deg, #42a5f5, #478ed1);
+    color: #fff;
+    text-align: left;
+    font-weight: 600;
+}
+
+.table td {
+    vertical-align: middle;
+    background-color: #fafafa;
+}
+
+/* Buttons */
+.btn {
+    border-radius: 20px;
+    font-size: 0.9rem;
+    padding: 8px 16px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background: linear-gradient(90deg, #ff9800, #f44336);
+    border: none;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(90deg, #f44336, #ff9800);
+    transform: scale(1.05);
+}
+
+.btn-info {
+    background: linear-gradient(90deg, #00bcd4, #2196f3);
+    border: none;
+    color: #fff;
+}
+
+.btn-info:hover {
+    background: linear-gradient(90deg, #2196f3, #00bcd4);
+    transform: scale(1.05);
+}
+
+/* Card view styling */
+.card {
+    border: none;
+    border-radius: 12px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+    background: linear-gradient(135deg, #ffffff, #f1f1f1);
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+.card-img-top {
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    height: 220px;
+    object-fit: cover;
+}
+
+.card-body h5 {
+    font-weight: 700;
+    color: #3f51b5; /* Indigo */
+}
+
+.card-body p {
+    color: #555;
+    font-size: 0.9rem;
+}
+
+    </style>
+
+{% endblock %}

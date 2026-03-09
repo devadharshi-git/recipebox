@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="recipe-detail">
+    <h2>{{ recipe.title }}</h2>
+    <p>{{ recipe.description }}</p>
+    <p>Ingredients: {{ recipe.ingredients }}</p>
+
+    <!-- Rating with stars -->
+    <p>Rating:
+        {% for i in "12345" %}
+            {% if forloop.counter <= recipe.rating %}
+                ⭐
+            {% else %}
+                ☆
+            {% endif %}
+        {% endfor %}
+        ({{ recipe.rating }}/5)
+    </p>
+
+    <!-- Recipe image -->
+    {% if recipe.image %}
+        <img src="{{ recipe.image.url }}" alt="{{ recipe.title }}" class="img-fluid mt-3">
+    {% endif %}
+</div>
+
+{% endblock %}
