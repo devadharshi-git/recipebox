@@ -26,7 +26,9 @@ SECRET_KEY = 'django-insecure-guzl7vdv)k-hk^&sp-$7r(!c*we&8pfj(dc8ctm2ez8s76b=r)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "recipebox-frxe.onrender.com"
+]
 
 
 # Application definition
